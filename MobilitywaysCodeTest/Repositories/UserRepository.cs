@@ -4,7 +4,7 @@ using MobilitywaysCodeTest.Models;
 using MobilitywaysCodeTest.Models.Response;
 using System.Net.Mail;
 
-namespace MobilitywaysCodeTest.Services
+namespace MobilitywaysCodeTest.Repositories
 {
     public class UserRepository
     {
@@ -18,6 +18,12 @@ namespace MobilitywaysCodeTest.Services
         public AddUserResponse AddUser(User user)
         {
             var response = new AddUserResponse();
+
+            if (string.IsNullOrWhiteSpace(user.Name) || string.IsNullOrWhiteSpace(user.EmailAddress) || string.IsNullOrWhiteSpace(user.Password))
+            {
+                response.Success = false;
+                response.Message = "Please complete all required fields";
+            }
 
             //Is it a vaid email address?
             if (!MailAddress.TryCreate(user.EmailAddress, out var emailAddress))

@@ -7,7 +7,7 @@
     using MobilitywaysCodeTest.Helpers;
     using MobilitywaysCodeTest.Models;
     using MobilitywaysCodeTest.Models.Response;
-    using MobilitywaysCodeTest.Services;
+    using MobilitywaysCodeTest.Repositories;
     using System.Security.Cryptography;
 
     [ApiController]
