@@ -19,6 +19,7 @@ namespace MobilitywaysCodeTest.Services
         {
             var response = new AddUserResponse();
 
+            //Is it a vaid email address?
             if (!MailAddress.TryCreate(user.EmailAddress, out var emailAddress))
             {
                 response.Success = false;
@@ -26,27 +27,30 @@ namespace MobilitywaysCodeTest.Services
                 return response;
             }
 
-            if (!_context.Users.Any(u => u.EmailAddress == user.EmailAddress))
-            {
-                var hashedPassword = PasswordHasher.Hash(user.Password);
-                user.Password = hashedPassword;
-
-                _context.Users.Add(user);
-                _context.SaveChanges();
-                response.Success = true;
-            }
-            else
+            //Is the email address already registered
+            if (_context.Users.Any(u => u.EmailAddress == user.EmailAddress))
             {
                 response.Success = false;
                 response.Message = "Email address already registred";
+                return response;
             }
-            
+
+            //Hash the password so we aren't storing plain text passwords
+            var hashedPassword = PasswordHasher.Hash(user.Password);
+            user.Password = hashedPassword;
+
+            //Add user to the DBContext and save
+            _context.Users.Add(user);
+            _context.SaveChanges();
+            response.Success = true;
+
 
             return response;
         }
 
         public List<UserDTO> GetUsers()
         {
+            //Remove the password from the user information before returning
             return _context.Users.Select(u => new UserDTO
             {
                 Name = u.Name,

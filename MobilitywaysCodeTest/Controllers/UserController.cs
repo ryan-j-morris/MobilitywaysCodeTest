@@ -38,10 +38,13 @@
         [HttpGet]
         public string GetToken(string emailAddress, string password)
         {
+            //Check user exists
             var user = _context.Users.FirstOrDefault(u => u.EmailAddress == emailAddress);
 
+            //Check we have a user and the password is correct
             if (user != null && PasswordHasher.Verify(password, user.Password))
             { 
+                //Generate token
                 TokenRepository tokenRepo = new TokenRepository(_configuration);
                 return tokenRepo.GenerateJwtToken(user);
             }

@@ -11,8 +11,10 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<UserContext>(opt =>
     opt.UseInMemoryDatabase("UserList"));
 
+//Encode key from appsettings
 var key = Encoding.ASCII.GetBytes(builder.Configuration["Key"]);
 
+//Add JWT authentication
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
