@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "129b8851-f9f6-454c-954c-ec7f76005695",
+		"name": "MobilitywaysCodeTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29185564"
+	},
+	"item": [
+		{
+			"name": "AddUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"ryan\",\r\n  \"emailAddress\": \"ryan@test.com\",\r\n  \"password\": \"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5083/User/AddUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5083",
+					"path": [
+						"User",
+						"AddUser"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Ryan",
+							"disabled": true
+						},
+						{
+							"key": "emailAddress",
+							"value": "ryan@test.com",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "test",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetToken",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5083/User/GetToken?emailAddress=ryan@test.com&password=test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5083",
+					"path": [
+						"User",
+						"GetToken"
+					],
+					"query": [
+						{
+							"key": "emailAddress",
+							"value": "ryan@test.com"
+						},
+						{
+							"key": "password",
+							"value": "test"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUsers",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
