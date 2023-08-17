@@ -10,6 +10,6 @@ namespace MobilitywaysCodeTest.Context
         {
         }
 
-        public DbSet<User> Users { get; set; } = null!;
+        public DbSet<ContextUser> Users { get; set; } = null!;
     }
 }

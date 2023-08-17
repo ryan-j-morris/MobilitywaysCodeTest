@@ -43,10 +43,20 @@ namespace MobilitywaysCodeTest.Repositories
 
             //Hash the password so we aren't storing plain text passwords
             var hashedPassword = PasswordHasher.Hash(user.Password);
-            user.Password = hashedPassword;
+
+
+
+            var contextUser = new ContextUser
+            {
+                Id = Guid.NewGuid(),
+                Name = user.Name,
+                EmailAddress = user.EmailAddress,
+                Password = hashedPassword
+            };
+                
 
             //Add user to the DBContext and save
-            _context.Users.Add(user);
+            _context.Users.Add(contextUser);
             _context.SaveChanges();
             response.Success = true;
 
@@ -59,6 +69,7 @@ namespace MobilitywaysCodeTest.Repositories
             //Remove the password from the user information before returning
             return _context.Users.Select(u => new UserDTO
             {
+                Id = u.Id,
                 Name = u.Name,
                 EmailAddress = u.EmailAddress
             }).ToList();

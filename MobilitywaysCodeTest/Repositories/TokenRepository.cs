@@ -13,7 +13,7 @@ namespace MobilitywaysCodeTest.Repositories
         public TokenRepository(IConfiguration configuration) {
             _configuration = configuration;
         }
-        public string GenerateJwtToken(User user)
+        public string GenerateJwtToken(ContextUser user)
         {
             //Encode the key from the appsettings
             var key = Encoding.ASCII.GetBytes(_configuration.GetValue<string>("Key"));
